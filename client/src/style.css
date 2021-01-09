@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: rgb(73, 142, 187);
+    text-decoration: unset;
+}
+
+ul {
+    margin-left: 1.5rem;
+    list-style: none;
+}
+
+button, input[type="submit"] {
+    border: none;
+    background: none;
+    color: unset;
+    cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, ol {
+    margin: 1em 0;
+}
+
+#header{
+    height: 3rem;
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#header .title {
+    margin:0;
+    padding: 0 1rem;
+    color: rgba(63, 159, 223, 0.501);
+}
+
+#header .auth-options {
+    height: 100%;
+    display:flex;
+}
+#header .auth-options button{
+    padding: 0rem 1rem;
+    color:  rgba(63, 159, 223, 0.501);
+    font-size: 1.1rem;
+}
+#header .auth-options button:hover{
+    background-color: violet;
+
+}
+
+@media screen and (max-width:360px){
+    #header .title{
+        font-size: .9rem;
+    }
+}
+
