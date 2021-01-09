@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 import UserContext from "../../context/UserContext";
+import ErrorMessages from "../inc/ErrorMessages";
 
 export default function Register() {
   const [email, setEmail] = useState();
@@ -9,27 +10,34 @@ export default function Register() {
   const [passwordCheck, setPasswordCheck] = useState();
   const [displayName, setDisplayName] = useState();
 
+  const [error, setError] = useState();
+
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
   const submit = async (e) => {
     e.preventDefault();
-    const newUser = { email, password, passwordCheck, displayName };
-    await Axios.post("http://localhost:5000/users/register", newUser);
-    const loginRes = await Axios.post("http://localhost:5000/users/login", {
-      email,
-      password,
-    });
-    setUserData({
-      token: loginRes.data.token,
-      user: loginRes.data.user,
-    });
-    localStorage.setItem("auth-token", loginRes.data.token);
-    history.push("/");
+    try {
+      const newUser = { email, password, passwordCheck, displayName };
+      await Axios.post("http://localhost:5000/users/register", newUser);
+      const loginRes = await Axios.post("http://localhost:5000/users/login", {
+        email,
+        password,
+      });
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+      localStorage.setItem("auth-token", loginRes.data.token);
+      history.push("/");
+    } catch (err) {
+        err.response.data.msg && setError(err.response.data.msg);
+    }
   };
 
   return (
     <div className="page">
       <h2>Register</h2>
+      { error && (<ErrorMessages message = {error} clearError={()=> setError(undefined)} />)}
       <form className="form" onSubmit={submit}>
         <div className="form-group">
           <label htmlFor="register-email">Email</label>
@@ -57,7 +65,7 @@ export default function Register() {
         </div>
         <div className="form-group">
           <label htmlFor="register-displayName">Display Name</label>
-          <br/>
+          <br />
           <input
             id="register-displayName"
             type="text"

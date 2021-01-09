@@ -58,7 +58,24 @@ body {
     width: 50%;
     justify-self: center;
 }
-
+.errors {
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border: 1px solid #e07c7c;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8d6d6;
+  }
+  .errors button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #df4343;
+    color: #ffffff;
+  }
+  
 a {
     color: rgb(73, 142, 187);
     text-decoration: unset;
