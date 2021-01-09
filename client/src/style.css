@@ -6,6 +6,59 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: "Roboto",sans-serif;
+}
+
+.page {
+    padding: 2rem;
+    justify-content: center;
+}
+
+.comtainer {
+    max-width: 900px;
+    margin: 0 auto;
+}
+.page h2 {
+    margin: auto;
+    justify-content: center;
+}
+
+.form{
+    align-self: center ;
+    align-items: center;
+    justify-content: center;
+    max-width: 80% !important;
+    margin: auto;
+}
+.form .form-group {
+    display: flex;
+    width: 60%;
+    justify-self: center;
+}
+.form .form-group label,input {
+    width: 50%;
+    margin: 1rem;
+    font-size: 1.1rem;
+    padding: 1rem;
+}
+.form .form-group input:focus {
+    border: 1px solid rgb(129, 193, 223);
+    box-shadow: inset 0px 0px 5px rgb(79, 182, 189);
+    font-size: 1.1rem;
+
+}
+.form input[type="submit"] {
+    border: none;
+    background: rgb(84, 142, 160);
+    border-radius: 5%;
+    color: unset;
+    cursor: pointer;
+    padding: 1rem;
+    width: 50%;
+    justify-self: center;
+}
+
 a {
     color: rgb(73, 142, 187);
     text-decoration: unset;

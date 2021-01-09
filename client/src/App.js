@@ -29,7 +29,7 @@ export default function App() {
       );
       if (tokenRes.data) {
         const userRes = await Axios.get("http://localhost:5000/users/", {
-          headers: { "x-auth-token": token }
+          headers: { "x-auth-token": token },
         });
         setUserData({
           token,
@@ -45,11 +45,13 @@ export default function App() {
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
           <Header />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-          </Switch>
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+            </Switch>
+          </div>
         </UserContext.Provider>
       </BrowserRouter>
     </>
