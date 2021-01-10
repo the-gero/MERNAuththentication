@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch /*  Route  */ } from "react-router-dom";
 import Axios from "axios";
+import PrivateRoute from "./Routes/PrivateRoute";
+import PublicRoute from "./Routes/PublicRoute";
 import Header from "./components/layouts/Header";
 import Home from "./components/pages/Home";
+import Services from "./components/pages/Services";
+import About from "./components/pages/About";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import UserContext from "./context/UserContext";
-
+import { isLoggedIn, getUser } from "../src/utils/Auth";
 import "./style.css";
 
 export default function App() {
@@ -22,18 +26,16 @@ export default function App() {
         localStorage.setItem("auth-token", "");
         token = "";
       }
-      const tokenRes = await Axios.post(
-        "http://localhost:5000/users/tokenIsValid",
-        null,
-        { headers: { "x-auth-token": token } }
-      );
-      if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/", {
-          headers: { "x-auth-token": token },
-        });
+      const tokenRes = await isLoggedIn();
+      console.log(isLoggedIn())
+      console.log(getUser())
+      if (tokenRes) {
+        const userRes = await getUser();
+        // console.log(isLoggedIn())
+         console.log(getUser(),"User")
         setUserData({
           token,
-          user: userRes.data,
+          user: userRes,
         });
       }
     };
@@ -47,9 +49,21 @@ export default function App() {
           <Header />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
+              <PublicRoute restricted={false} component={Home} path="/" exact />
+              <PublicRoute
+                restricted={true}
+                component={Login}
+                path="/login"
+                exact
+              />
+              <PublicRoute
+                restricted={true}
+                component={Register}
+                path="/register"
+                exact
+              />
+              <PrivateRoute component={Services} path="/services" exact />
+              <PrivateRoute component={About} path="/about" exact />
             </Switch>
           </div>
         </UserContext.Provider>
