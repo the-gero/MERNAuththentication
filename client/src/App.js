@@ -26,13 +26,11 @@ export default function App() {
         localStorage.setItem("auth-token", "");
         token = "";
       }
+
       const tokenRes = await isLoggedIn();
-      console.log(isLoggedIn())
-      console.log(getUser())
+      console.log(tokenRes,"tokenRes")
       if (tokenRes) {
         const userRes = await getUser();
-        // console.log(isLoggedIn())
-         console.log(getUser(),"User")
         setUserData({
           token,
           user: userRes,

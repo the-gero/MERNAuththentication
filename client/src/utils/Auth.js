@@ -1,19 +1,17 @@
 import Api from "../Api";
-import ErrorMessages from "../components/inc/ErrorMessages";
 
-var test = undefined;
+var test;
 var user ;
-export const isLoggedIn = () => {
-  Api()
+export const isLoggedIn = async () => {
+  await Api()
     .post("/users/tokenIsValid")
     .then((res) => {
       test= res.data
     });
     return test;
-    // return "Hellow";
 };
-export const getUser = () => {
-  Api()
+export const getUser = async () => {
+  await Api()
     .get("/users/")
     .then((res) => {
       user= res.data;
