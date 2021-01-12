@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { isLoggedIn } from "../utils/Auth";
+
 const PrivateRoute = ({ component: Component, ...rest }) => {
+  const [isAuthed, setIsAuthed] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect( async () => {
+    const value = await isLoggedIn()
+    setIsAuthed(value)
+    setLoading(false)
+  }, [])
   return (
+    loading?
+    <p>Loading...</p>
+    :
     <Route
       {...rest}
       render={(props) =>
-        isLoggedIn() ? <Component {...props} /> : <Redirect to="/login" />
+        isAuthed ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/login" />
+        )
       }
     />
   );
