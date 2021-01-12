@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Axios from "axios";
 import UserContext from "../../context/UserContext";
 import ErrorMessages from "../inc/ErrorMessages";
+import { logIn, register } from '../../utils/Auth'
 
 export default function Register() {
   const [email, setEmail] = useState();
@@ -18,16 +18,16 @@ export default function Register() {
     e.preventDefault();
     try {
       const newUser = { email, password, passwordCheck, displayName };
-      await Axios.post("http://localhost:5000/users/register", newUser);
-      const loginRes = await Axios.post("http://localhost:5000/users/login", {
+      await register(newUser);
+      const loginRes = await logIn( {
         email,
         password,
       });
       setUserData({
-        token: loginRes.data.token,
-        user: loginRes.data.user,
+        token: loginRes.token,
+        user: loginRes.user,
       });
-      localStorage.setItem("auth-token", loginRes.data.token);
+      localStorage.setItem("auth-token", loginRes.token);
       history.push("/");
     } catch (err) {
         err.response.data.msg && setError(err.response.data.msg);
