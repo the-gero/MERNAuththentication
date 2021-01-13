@@ -31,3 +31,4 @@ mongoose.connect(
 //setup routes
 
 app.use("/users", require("./routes/userRouter"));
+app.use("/user", require("./routes/proFileRouter"));
