@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch /*  Route  */ } from "react-router-dom";
-import Axios from "axios";
 import PrivateRoute from "./Routes/PrivateRoute";
 import PublicRoute from "./Routes/PublicRoute";
 import Header from "./components/layouts/Header";
 import Home from "./components/pages/Home";
 import Services from "./components/pages/Services";
 import About from "./components/pages/About";
+import UserProfile from "./components/pages/user/profile/UpdateProfile";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import UserContext from "./context/UserContext";
@@ -62,6 +62,7 @@ export default function App() {
               />
               <PrivateRoute component={Services} path="/services" exact />
               <PrivateRoute component={About} path="/about" exact />
+              <PrivateRoute component={UserProfile} path="/profile" exact />
             </Switch>
           </div>
         </UserContext.Provider>

@@ -36,7 +36,7 @@ body {
     width: 60%;
     justify-self: center;
 }
-.form .form-group label,input {
+.form .form-group label,input,textarea {
     width: 50%;
     margin: 1rem;
     font-size: 1.1rem;

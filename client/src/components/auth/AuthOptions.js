@@ -9,6 +9,7 @@ export default function AuthOptions() {
   const register = () => history.push("/register");
   const login = () => history.push("/login");
   const services = () => history.push("/services");
+  const profile = () => history.push("/profile");
   const about = () => history.push("/about");
   const logout = () => {
       setUserData({
@@ -25,6 +26,7 @@ export default function AuthOptions() {
         <>
         <button onClick={about}>About</button>
         <button onClick={services}>Services</button>
+        <button onClick={profile}>Profile</button>
         <button onClick={logout}>Logout</button>
         </>
       ) : (

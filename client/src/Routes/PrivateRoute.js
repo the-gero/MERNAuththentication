@@ -6,23 +6,21 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const [isAuthed, setIsAuthed] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect( async () => {
-    const value = await isLoggedIn()
-    setIsAuthed(value)
-    setLoading(false)
-  }, [])
-  return (
-    loading?
+  useEffect(() => {
+    const getLogin = async () => {
+      const value = await isLoggedIn();
+      setIsAuthed(value);
+      setLoading(false);
+    };
+    getLogin();
+  }, []);
+  return loading ? (
     <p>Loading...</p>
-    :
+  ) : (
     <Route
       {...rest}
       render={(props) =>
-        isAuthed ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        )
+        isAuthed ? <Component {...props} /> : <Redirect to="/login" />
       }
     />
   );
