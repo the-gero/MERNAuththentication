@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+    webapp-server:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      image: mern-auth-server-img
+      container_name: mern-auth-node-express
+      volumes:
+       - .:/usr/src/app
+       - /usr/src/app/node_modules
+      # ports:
+      #   - "8080:8080"
+      depends_on:
+        - mongo
+      env_file: .env
+      environment:
+        - MONGODB_CONNECTION_STRING=mongodb+srv://gero:@lphaSXN136@cluster0.zwnig.mongodb.net/test
+        - PORT=5000
+        - JWT_SECRET=zP7lH1pP2mC1sC6xP2yR4aN6eD2hE1nQ
+    mongo:
+      image: mongo
+      container_name: mern-auth-mongodb
+      ports:
+        - "27017:27017"

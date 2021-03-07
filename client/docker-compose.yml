@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+    client-server:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: mern-auth-client
+      volumes:
+       - .:/usr/src/app
+       - /usr/src/app/node_modules
+      ports:
+        - "8080:8080"
+     
+     
